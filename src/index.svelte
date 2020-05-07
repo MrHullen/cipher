@@ -34,12 +34,12 @@
 <section class="section content">
   <h1>Cipher</h1>
 
-  <label>
+  <label class="label">
     Text:
-    <input type="text" bind:value={input}>
+    <input class="input" type="text" bind:value={input}>
   </label>
-  <button on:click={encrypt}>Encrypt</button>
-  <button on:click={decrypt}>Decrypt</button>
+  <button class="button is-success" on:click={encrypt}>Encrypt</button>
+  <button class="button is-warning" on:click={decrypt}>Decrypt</button>
 
   <h2>Result</h2>
   <p>{output}</p>
