@@ -35,6 +35,44 @@
 
     output = plaintext
   }
+
+  function analyse() {
+    let ciphertext = input
+    let charCode = ''
+    let codes = []
+    let analysis = ''
+
+    // create an array of character codes from the string
+    for (let i = 0; i < ciphertext.length; i++) {
+      if (ciphertext[i] !== '|') {
+        charCode += ciphertext[i]
+      } else {
+        codes = [...codes, charCode]
+        charCode = ''
+      }
+    }
+
+    // if the array isn't empty, count all the duplicates
+    if (codes.length) {
+      codes.sort()
+
+      let currentCode = codes[0]
+      let count = 0
+
+      for (let i = 0; i < codes.length; i++) {
+        if (codes[i] === currentCode) {
+          count++
+        } else {
+          analysis += currentCode + ' appears ' + count + ' times.<br>'
+          currentCode = codes[i]
+          count = 1
+        }
+      }
+      analysis += currentCode + ' appears ' + count + ' times.<br>'
+    }
+
+    output = analysis
+  }
 </script>
 
 <section class="section content">
@@ -46,8 +84,9 @@
   </label>
   <button class="button is-success" on:click={encrypt}>Encrypt</button>
   <button class="button is-warning" on:click={decrypt}>Decrypt</button>
+  <button class="button" on:click={analyse}>Analyse</button>
 
   <h2>Result</h2>
-  <p>{output}</p>
+  <p>{@html output}</p>
 </section>
 
