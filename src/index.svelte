@@ -12,6 +12,23 @@
 
     output = ciphertext
   }
+
+  function decrypt() {
+    let ciphertext = input
+    let plaintext = ''
+    let charCode = ''
+
+    for (let i = 0; i < ciphertext.length; i++) {
+      if (ciphertext[i] !== '|') {
+        charCode += ciphertext[i]
+      } else {
+        plaintext += String.fromCharCode(charCode)
+        charCode = ''
+      }
+    }
+
+    output = plaintext
+  }
 </script>
 
 <section class="section content">
@@ -22,6 +39,7 @@
     <input type="text" bind:value={input}>
   </label>
   <button on:click={encrypt}>Encrypt</button>
+  <button on:click={decrypt}>Decrypt</button>
 
   <h2>Result</h2>
   <p>{output}</p>
